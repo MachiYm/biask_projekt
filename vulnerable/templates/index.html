@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h1>Interný správca produktov</h1>
+    {% if user %}
+        <p>Prihlásený ako <strong>{{ user }}</strong>.</p>
+    {% else %}
+        <p>Nie ste prihlásený. Prejdite na <a href="{{ url_for('login') }}">Login</a>.</p>
+    {% endif %}
+    <p>Táto verzia je <span class="error">zámerne zraniteľná</span> na SQL injection
+    a slúži len na školskú demonštráciu.</p>
+</div>
+{% endblock %}

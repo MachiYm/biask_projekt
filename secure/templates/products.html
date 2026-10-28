@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h1>Produkty</h1>
+    <form method="get">
+        <label>Hľadať podľa názvu<input type="text" name="search" value="{{ search }}"></label>
+        <button type="submit">Hľadať</button>
+    </form>
+</div>
+
+<div class="card">
+    <table>
+        <tr><th>ID</th><th>Názov</th><th>Popis</th><th>Cena</th></tr>
+        {% for row in rows %}
+        <tr>
+            <td>{{ row["id"] }}</td>
+            <td>{{ row["name"] }}</td>
+            <td>{{ row["description"] }}</td>
+            <td>{{ row["price"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

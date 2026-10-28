@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtuálne prostredie
+venv/
+.venv/
+env/
+
+# SQLite databázy generované za behu
+*.db
+*.sqlite
+*.sqlite3
+
+# Editory / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
